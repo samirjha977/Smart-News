@@ -4,6 +4,7 @@
   "description": "Smart news pulling",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha"
   },
   "author": "Samir Jha",
