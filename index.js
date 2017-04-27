@@ -2,8 +2,6 @@
 require('dotenv').config();
 var request = require('request');
 var mongodb = require('./Model/mongodb.utils');
-var scheduler = require('./scheduler.util.js');
-var News = require('./Model/news.model.js');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -13,7 +11,6 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var api = require('./api.util.js');
 var fs = require('fs')
 var winston = require('winston');
 var morgan = require('morgan')
@@ -25,13 +22,6 @@ var favicon = require('serve-favicon');
 mongodb.createEventListeners();
 mongodb.connect();
 
-
-
-scheduler.apiFetchScheduler();
-
-News.remove({}, function (err, cb) {
-  console.log("Database empty");
-});
 
 
 //creating access.log or server log file
@@ -50,12 +40,7 @@ var logger = new winston.Logger ({
   ]
 });
 
-try {
-    api.fetchApi();
-    logger.info("News Api fetch complete");
-} catch(err) {
-    logger.error('Could not fetch news' + err);
-  }
+
 
 
 app.use(morgan('combined', {stream: accessLogStream}))

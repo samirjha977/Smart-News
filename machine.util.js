@@ -1,7 +1,7 @@
 var sentimentAnalysis = require('sentiment');
 var mongodb = require('./Model/mongodb.utils');
 var News = require('./Model/news.model');
-var AlchemyLanguageV1 = require('watson-developer-cloud/alchemy-language/v1');
+var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 var winston = require('winston');
 
 var logger = new winston.Logger ({
@@ -21,32 +21,56 @@ module.exports = {
 
 
 function sentiment(articles) {
-    var alchemy_language = new AlchemyLanguageV1({
-      api_key: process.env.IBM_SENTI_API
-    });
-    var params = {
-      text: articles.description
-    };
+  var nlu = new NaturalLanguageUnderstandingV1({
+    username: '245084f7-460d-4b34-8b99-b0d1101374ec',
+    password: 'KLjOiMilvu1l',
+    version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2017_02_27
+  });
 
-    alchemy_language.sentiment(params, function (err, response) {
+  var parameters = {
+      'text': articles.description,
+      'features': {
+        'entities': {
+          'emotion': true,
+          'sentiment': true,
+          'limit': 2
+        },
+        'keywords': {
+          'emotion': true,
+          'sentiment': true,
+          'limit': 2
+        }
+      }
+    }
+
+      nlu.analyze(parameters, function(err, response) {
       if (err)
         console.log('error:', err);
       else
-      var newNews = new News({
-      snippet: articles.title,
-      description: articles.description,
-      sentimentScore: response.docSentiment.score,
-      date: articles.publishedAt,
-      mood: response.docSentiment.type ,
-      datestamp: new Date(),
-      url: articles.url,
-      urlimage: articles.urlToImage
-    });
-    newNews.save()
-    .then(function (result) {
-        logger.info('ADDED ITEM..................................... \n');
-        console.log(result);
-    });
-
-  });
+        console.log(articles.description);
+        console.log();
+        if(response.keywords[0].sentiment.score > 0) {
+          var moodset = 'positive';
+        } else if (response.keywords[0].sentiment.score < 0) {
+          var moodset = 'negative';
+        } else {
+          var moodset = "neutral";
+        }
+        console.log(moodset);
+        var newNews = new News({
+            snippet: articles.title,
+            description: articles.description,
+            sentimentScore: response.keywords[0].sentiment.score,
+            date: articles.publishedAt,
+            mood: moodset,
+            datestamp: new Date(),
+            url: articles.url,
+            urlimage: articles.urlToImage
+          });
+          newNews.save()
+          .then(function (result) {
+              logger.info('ADDED ITEM..................................... \n');
+              console.log(result);
+          });
+        });
 };

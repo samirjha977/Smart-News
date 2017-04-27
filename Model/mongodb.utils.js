@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var winston = require('winston');
+var scheduler = require('../scheduler.util.js');
+var News = require('../Model/news.model.js');
+var api = require('../api.util.js');
 
 var logger = new winston.Logger ({
   transports: [
@@ -19,6 +22,16 @@ module.exports = {
 function createEventListeners() {
   mongoose.connection.on('connected', function () {
     logger.info('Successfully connected to database.');
+    News.remove({}, function (err, cb) {
+      console.log("Database empty");
+    });
+    try {
+        api.fetchApi();
+        logger.info("News Api fetch complete");
+    } catch(err) {
+        logger.error('Could not fetch news' + err);
+      }
+    scheduler.apiFetchScheduler();
   });
 
   mongoose.connection.on('disconnected', function () {
@@ -32,6 +45,7 @@ function createEventListeners() {
 
 function connect() {
   mongoose.connect(process.env.DB_PASS);
+  // mongoose.connect('mongodb://localhost/NewsPortal');
 }
 
 function disconnect() {
