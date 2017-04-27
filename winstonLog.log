@@ -1993,3 +1993,33 @@
 {"level":"info","message":"Fetching News from api.utils.js","timestamp":"2017-04-27T18:03:02.129Z"}
 {"level":"info","message":"Hourly update initiated","timestamp":"2017-04-27T18:03:02.136Z"}
 {"level":"info","message":"Got response from the news.api.org","timestamp":"2017-04-27T18:03:02.538Z"}
+{"level":"info","message":"Server started on port 3000","timestamp":"2017-04-27T18:19:00.817Z"}
+{"level":"info","message":"Server started on port 3000","timestamp":"2017-04-27T18:19:27.474Z"}
+{"level":"info","message":"Successfully connected to database.","timestamp":"2017-04-27T18:19:27.490Z"}
+{"level":"info","message":"Fetching News from api.utils.js","timestamp":"2017-04-27T18:19:27.492Z"}
+{"level":"info","message":"Hourly update initiated","timestamp":"2017-04-27T18:19:27.499Z"}
+{"level":"info","message":"News Api fetch complete","timestamp":"2017-04-27T18:19:27.498Z"}
+{"level":"info","message":"Got response from the news.api.org","timestamp":"2017-04-27T18:19:30.946Z"}
+{"level":"info","message":"Server started on port 3000","timestamp":"2017-04-27T18:20:22.721Z"}
+{"level":"info","message":"Successfully connected to database.","timestamp":"2017-04-27T18:20:22.737Z"}
+{"level":"info","message":"Fetching News from api.utils.js","timestamp":"2017-04-27T18:20:22.740Z"}
+{"level":"info","message":"Hourly update initiated","timestamp":"2017-04-27T18:20:22.745Z"}
+{"level":"info","message":"News Api fetch complete","timestamp":"2017-04-27T18:20:22.745Z"}
+{"level":"info","message":"Got response from the news.api.org","timestamp":"2017-04-27T18:20:26.195Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.336Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.348Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.395Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.412Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.418Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.422Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.427Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.437Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.446Z"}
+{"level":"info","message":"ADDED ITEM..................................... \n","timestamp":"2017-04-27T18:20:28.453Z"}
+{"level":"info","message":"Server started on port 3000","timestamp":"2017-04-27T18:20:52.433Z"}
+{"level":"error","message":"There was an issue connecting to the database: MongoError: connection 0 to ds111441.mlab.com:11441 timed out","timestamp":"2017-04-27T18:21:22.738Z"}
+{"level":"info","message":"Successfully connected to database.","timestamp":"2017-04-27T18:21:23.811Z"}
+{"level":"info","message":"News Api fetch complete","timestamp":"2017-04-27T18:21:23.849Z"}
+{"level":"info","message":"Fetching News from api.utils.js","timestamp":"2017-04-27T18:21:23.829Z"}
+{"level":"info","message":"Hourly update initiated","timestamp":"2017-04-27T18:21:23.849Z"}
+{"level":"info","message":"Got response from the news.api.org","timestamp":"2017-04-27T18:21:24.133Z"}

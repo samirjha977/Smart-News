@@ -22,8 +22,8 @@ module.exports = {
 
 function sentiment(articles) {
   var nlu = new NaturalLanguageUnderstandingV1({
-    username: process.ENV.IBM_SENTI_USER,
-    password: process.ENV.IBM_SENTI_PASS,
+    username: process.env.IBM_SENTI_USER,
+    password: process.env.IBM_SENTI_PASS,
     version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2017_02_27
   });
 
