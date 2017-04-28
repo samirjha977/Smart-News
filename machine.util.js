@@ -48,7 +48,9 @@ function sentiment(articles) {
       if (err)
         console.log('error:', err);
       else
-      if(response.hasOwnProperty('keywords')) {
+      // console.log("---------------------",JSON.stringify( response.keywords[0], null, 2));
+      if(response.hasOwnProperty('keywords') && response.keywords[0] !== undefined) {
+          if(response.keywords[0].hasOwnProperty('sentiment')) {
         if(response.keywords[0].sentiment.score > 0) {
           var moodset = 'positive';
         } else if (response.keywords[0].sentiment.score < 0) {
@@ -56,8 +58,9 @@ function sentiment(articles) {
         } else {
           var moodset = "neutral";
         }
-        // console.log("---------------------",JSON.stringify(response, null, 2));
-        if(response.keywords[1].hasOwnProperty('emotion')) {
+      }
+
+        if(response.keywords[0].hasOwnProperty('emotion') && response.keywords[0].emotion !== undefined) {
             var newNews = new News({
             snippet: articles.title,
             description: articles.description,
@@ -67,11 +70,11 @@ function sentiment(articles) {
             datestamp: new Date(),
             url: articles.url,
             urlimage: articles.urlToImage,
-            sadness: response.keywords[1].emotion.sadness,
-            Joy: response.keywords[1].emotion.joy,
-            fear: response.keywords[1].emotion.fear,
-            disgust: response.keywords[1].emotion.disgust,
-            anger: response.keywords[1].emotion.anger
+            sadness: response.keywords[0].emotion.sadness,
+            Joy: response.keywords[0].emotion.joy,
+            fear: response.keywords[0].emotion.fear,
+            disgust: response.keywords[0].emotion.disgust,
+            anger: response.keywords[0].emotion.anger
           });
           newNews.save()
           .then(function (result) {
