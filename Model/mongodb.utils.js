@@ -44,8 +44,8 @@ function createEventListeners() {
 }
 
 function connect() {
-  mongoose.connect(process.env.DB_PASS);
-  // mongoose.connect('mongodb://localhost/NewsPortal');
+  // mongoose.connect(process.env.DB_PASS);
+  mongoose.connect('mongodb://localhost/NewsPortal');
 }
 
 function disconnect() {

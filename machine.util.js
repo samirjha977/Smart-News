@@ -48,7 +48,7 @@ function sentiment(articles) {
       if (err)
         console.log('error:', err);
       else
-        console.log(articles.description);
+        console.log(response.emotion);
         if(response.keywords[0].sentiment.score > 0) {
           var moodset = 'positive';
         } else if (response.keywords[0].sentiment.score < 0) {
@@ -56,6 +56,30 @@ function sentiment(articles) {
         } else {
           var moodset = "neutral";
         }
+        if(response.keywords[1].emotion === undefined){
+          var newNews = new News({
+              snippet: articles.title,
+              description: articles.description,
+              sentimentScore: response.keywords[0].sentiment.score,
+              date: articles.publishedAt,
+              mood: moodset,
+              datestamp: new Date(),
+              url: articles.url,
+              urlimage: articles.urlToImage,
+              sadness: 0,
+              Joy: 0,
+              fear: 0,
+              disgust: 0,
+              anger: 0
+            });
+            newNews.save()
+            .then(function (result) {
+                logger.info('ADDED ITEM..................................... \n');
+                console.log(result);
+            });
+        } else
+        {
+        console.log(response.keywords[1].emotion.sadness);
         var newNews = new News({
             snippet: articles.title,
             description: articles.description,
@@ -76,5 +100,6 @@ function sentiment(articles) {
               logger.info('ADDED ITEM..................................... \n');
               console.log(result);
           });
-        });
+        }
+      });
 };
