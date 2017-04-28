@@ -21,6 +21,7 @@ module.exports = {
 
 
 function sentiment(articles) {
+
   var nlu = new NaturalLanguageUnderstandingV1({
     username: process.env.IBM_SENTI_USER,
     password: process.env.IBM_SENTI_PASS,
@@ -28,7 +29,7 @@ function sentiment(articles) {
   });
 
   var parameters = {
-      'text': articles.description,
+      'text': articles.title,
       'features': {
         'entities': {
           'emotion': true,
@@ -48,7 +49,6 @@ function sentiment(articles) {
         console.log('error:', err);
       else
         console.log(articles.description);
-        console.log();
         if(response.keywords[0].sentiment.score > 0) {
           var moodset = 'positive';
         } else if (response.keywords[0].sentiment.score < 0) {
@@ -56,7 +56,6 @@ function sentiment(articles) {
         } else {
           var moodset = "neutral";
         }
-        console.log(moodset);
         var newNews = new News({
             snippet: articles.title,
             description: articles.description,
@@ -65,7 +64,12 @@ function sentiment(articles) {
             mood: moodset,
             datestamp: new Date(),
             url: articles.url,
-            urlimage: articles.urlToImage
+            urlimage: articles.urlToImage,
+            sadness: response.keywords[1].emotion.sadness,
+            Joy: response.keywords[1].emotion.joy,
+            fear: response.keywords[1].emotion.fear,
+            disgust: response.keywords[1].emotion.disgust,
+            anger: response.keywords[1].emotion.anger
           });
           newNews.save()
           .then(function (result) {

@@ -9,7 +9,12 @@ var newsSchema = mongoose.Schema({
   date: String,
   datestamp: String,
   url: String,
-  urlimage: String
+  urlimage: String,
+  sadness: Number,
+  Joy: Number,
+  fear: Number,
+  disgust: Number,
+  anger: Number
 });
 
 module.exports = mongoose.model('News', newsSchema);
